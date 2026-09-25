@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeTester - Strategy Backtesting Platform</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="sticky-top bg-white border-bottom">
+    <div class="container mainContainer">
+      <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <a class="navbar-brand siteLogo d-flex align-items-center" href="#">
+          <span>📈</span> TradeTester
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 navLinks">
+            <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+          <a href="#pricing" class="btn primaryBtn mainBtn">Start Testing</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="heroSection text-center">
+    <div class="container mainContainer">
+      <span class="topBadge mb-3">Simple and Fast Backtesting</span>
+      <h1 class="heroTitle fw-bold my-3">Test Your Trading Strategies Before Risking Real Money</h1>
+      <p class="heroSubtitle mx-auto mb-4">Upload historical data, set your rules, and instantly calculate net profit, win rate, and drawdown with precise historical analysis.</p>
+
+      <div class="heroButtons d-flex justify-content-center gap-3 mb-5">
+        <a href="#pricing" class="btn primaryBtn mainBtn">Get Started Free</a>
+        <a href="#features" class="btn outlineBtn mainBtn">Learn More</a>
+      </div>
+
+      <div class="dashboardPreview card border-0 shadow-sm">
+        <div class="card-body p-4 p-md-5">
+          <div class="row g-4 statsGrid">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="statCard p-4 rounded text-start">
+                <div class="statTitle text-uppercase">Net Profit</div>
+                <div class="statValue blueText fw-bold">+$12,450.00</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="statCard p-4 rounded text-start">
+                <div class="statTitle text-uppercase">Win Rate</div>
+                <div class="statValue fw-bold">68.4%</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="statCard p-4 rounded text-start">
+                <div class="statTitle text-uppercase">Profit Factor</div>
+                <div class="statValue fw-bold">2.14</div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="statCard p-4 rounded text-start">
+                <div class="statTitle text-uppercase">Max Drawdown</div>
+                <div class="statValue fw-bold">-4.2%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featuresSection py-5 border-top border-bottom bg-white" id="features">
+    <div class="container mainContainer py-4">
+      <div class="sectionTitle text-center mb-5">
+        <h2 class="fw-bold">Key Platform Features</h2>
+        <p class="text-muted">Everything you need to validate your trading rules efficiently.</p>
+      </div>
+
+      <div class="row g-4 featuresGrid">
+        <div class="col-12 col-md-4">
+          <div class="featureCard p-4 rounded h-100">
+            <div class="featureIcon rounded d-flex align-items-center justify-content-center fw-bold mb-3">1</div>
+            <h3 class="h5 fw-bold">CSV Data Import</h3>
+            <p class="text-muted mb-0">Easily import historical price data from TradingView, MetaTrader, or custom spreadsheets.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="featureCard p-4 rounded h-100">
+            <div class="featureIcon rounded d-flex align-items-center justify-content-center fw-bold mb-3">2</div>
+            <h3 class="h5 fw-bold">Performance Metrics</h3>
+            <p class="text-muted mb-0">Get precise statistics on risk-to-reward ratio, maximum drawdown, and win/loss percentages.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="featureCard p-4 rounded h-100">
+            <div class="featureIcon rounded d-flex align-items-center justify-content-center fw-bold mb-3">3</div>
+            <h3 class="h5 fw-bold">Instant Calculations</h3>
+            <p class="text-muted mb-0">Fast calculations execute years of trade data in seconds without writing complex scripts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricingSection py-5" id="pricing">
+    <div class="container mainContainer py-4">
+      <div class="sectionTitle text-center mb-5">
+        <h2 class="fw-bold">Simple Pricing</h2>
+        <p class="text-muted">Choose the plan that fits your trading needs.</p>
+      </div>
+
+      <div class="row g-4 justify-content-center pricingGrid">
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="priceCard card h-100 p-4 text-center border">
+            <div class="card-body d-flex flex-column">
+              <div class="priceTitle h4 fw-bold">Starter</div>
+              <div class="priceAmount display-5 fw-bold my-3">$0</div>
+              <ul class="priceFeatures list-unstyled text-start my-4">
+                <li class="py-2 border-bottom">Up to 5 Backtests / Month</li>
+                <li class="py-2 border-bottom">Basic Statistics & Metrics</li>
+                <li class="py-2 border-bottom">CSV File Imports</li>
+                <li class="py-2 border-bottom">Standard Support</li>
+              </ul>
+              <a href="#" class="btn outlineBtn mainBtn fullWidth w-100 mt-auto">Get Started</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="priceCard featuredCard card h-100 p-4 text-center border-primary position-relative">
+            <span class="popularBadge badge bg-primary position-absolute top-0 start-50 translate-middle">POPULAR</span>
+            <div class="card-body d-flex flex-column">
+              <div class="priceTitle h4 fw-bold">Pro Trader</div>
+              <div class="priceAmount display-5 fw-bold my-3">$19<span class="monthlyLabel h6 text-muted fs-6">/mo</span></div>
+              <ul class="priceFeatures list-unstyled text-start my-4">
+                <li class="py-2 border-bottom">Unlimited Backtesting</li>
+                <li class="py-2 border-bottom">Advanced Metrics & Reports</li>
+                <li class="py-2 border-bottom">Export Results to PDF/CSV</li>
+                <li class="py-2 border-bottom">Priority Customer Support</li>
+              </ul>
+              <a href="#" class="btn primaryBtn mainBtn fullWidth w-100 mt-auto">Upgrade to Pro</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contactSection py-5 bg-white border-top" id="contact">
+    <div class="container mainContainer py-4">
+      <div class="contactHeader text-center mb-5">
+        <h2 class="fw-bold">Get in Touch</h2>
+        <p class="text-muted">Have questions or need assistance? Connect with us directly.</p>
+      </div>
+
+      <div class="row g-4 contactGrid">
+        <div class="col-12 col-md-4">
+          <div class="contactCard card p-4 text-center border h-100">
+            <div class="contactIcon fs-2 mb-2">👤</div>
+            <div class="contactLabel text-uppercase text-muted fw-bold small">Name</div>
+            <div class="contactValue fw-bold text-dark fs-5">Muhammad Atif</div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="contactCard card p-4 text-center border h-100">
+            <div class="contactIcon fs-2 mb-2">✉️</div>
+            <div class="contactLabel text-uppercase text-muted fw-bold small">Email</div>
+            <div class="contactValue fw-bold text-dark fs-5">
+              <a href="mailto:muhammadatif04586@gmail.com" class="text-decoration-none">muhammadatif04586@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="contactCard card p-4 text-center border h-100">
+            <div class="contactIcon fs-2 mb-2">📞</div>
+            <div class="contactLabel text-uppercase text-muted fw-bold small">Phone</div>
+            <div class="contactValue fw-bold text-dark fs-5">
+              <a href="tel:03161515607" class="text-decoration-none">03161515607</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer py-4 bg-light border-top text-center text-muted">
+    <div class="container mainContainer">
+      <p class="mb-0">TradeTester.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
