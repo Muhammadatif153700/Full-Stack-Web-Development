@@ -1,0 +1,177 @@
+html {
+  font-size: 20px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F4F7FA;
+  color: #2D3748;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E2E8F0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0284C7;
+  border-radius: 6px;
+  border: 3px solid #E2E8F0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0369A1;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0284C7 #E2E8F0;
+}
+
+.mainContainer {
+  max-width: 1400px;
+}
+
+.siteLogo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0284C7 !important;
+}
+
+.navLinks .nav-link {
+  font-size: 1rem;
+  color: #4A5568 !important;
+  font-weight: 500;
+}
+
+.navLinks .nav-link:hover {
+  color: #0284C7 !important;
+}
+
+.mainBtn {
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.primaryBtn {
+  background-color: #0284C7 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+.primaryBtn:hover {
+  background-color: #0369A1 !important;
+}
+
+.outlineBtn {
+  background-color: transparent !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #334155 !important;
+}
+
+.outlineBtn:hover {
+  background-color: #F1F5F9 !important;
+}
+
+.heroSection {
+  padding: 100px 0 80px;
+}
+
+.topBadge {
+  display: inline-block;
+  background-color: #E0F2FE;
+  color: #0369A1;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.heroTitle {
+  font-size: 3.2rem;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 1.15rem;
+  color: #64748B;
+  max-width: 900px;
+}
+
+.dashboardPreview {
+  border-radius: 20px !important;
+}
+
+.statCard {
+  background-color: #F8FAFC;
+  border: 1px solid #F1F5F9;
+}
+
+.statTitle {
+  font-size: 0.75rem;
+  color: #64748B;
+  letter-spacing: 0.8px;
+}
+
+.statValue {
+  font-size: 1.8rem;
+  color: #0F172A;
+}
+
+.blueText {
+  color: #0284C7;
+}
+
+.featureCard {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+}
+
+.featureIcon {
+  width: 56px;
+  height: 56px;
+  font-size: 1.1rem;
+  background-color: #E0F2FE;
+  color: #0284C7;
+}
+
+.priceCard {
+  border-radius: 20px !important;
+}
+
+.featuredCard {
+  border: 2px solid #0284C7 !important;
+}
+
+.popularBadge {
+  background-color: #0284C7 !important;
+  font-size: 0.75rem;
+  padding: 6px 18px;
+  border-radius: 14px;
+}
+
+.contactCard {
+  background-color: #F8FAFC;
+  border-radius: 16px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contactCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+}
+
+.contactValue a {
+  color: #0284C7;
+}
+
+.contactValue a:hover {
+  text-decoration: underline !important;
+}
