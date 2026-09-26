@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: #050505;
+}
+
+.searchBox input:focus {
+  box-shadow: none;
+  background-color: #f0f2f5;
+}
+
+.navTab {
+  transition: background-color 0.2s ease;
+}
+
+.navTab:hover {
+  background-color: #f0f2f5;
+}
+
+.iconBtn {
+  width: 40px;
+  height: 40px;
+  background-color: #e4e6eb;
+}
+
+.iconBtn:hover {
+  background-color: #d8dadf;
+}
+
+.profilePicPlaceholder {
+  width: 40px;
+  height: 40px;
+  font-size: 0.85rem;
+}
+
+.profilePicPlaceholderSmall {
+  width: 36px;
+  height: 36px;
+  font-size: 0.75rem;
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+}
+
+.profilePicSmall {
+  width: 36px;
+  height: 36px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.sidebarItem:hover, .contactItem:hover {
+  background-color: #e4e6eb;
+}
+
+.onlineStatus {
+  width: 11px;
+  height: 11px;
+}
+
+.storiesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.storyCard {
+  width: 110px;
+  height: 170px;
+}
+
+.createStory .storyImg {
+  height: 120px;
+  font-size: 1.5rem;
+}
+
+.createBtn {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+}
+
+.storyAvatar {
+  top: 8px;
+  left: 8px;
+  width: 32px;
+  height: 32px;
+}
+
+.storyName {
+  bottom: 8px;
+  left: 8px;
+}
+
+
+.postCard {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.postHeader,
+.postText,
+.postActions,
+.createPostCard {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.postImage {
+  width: 100% !important;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.actionBtn:hover, .optionBtn:hover {
+  background-color: #f0f2f5;
+}
