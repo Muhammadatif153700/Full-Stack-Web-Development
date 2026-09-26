@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light text-dark">
+
+  <header class="navbar navbar-expand sticky-top bg-white border-bottom shadow-sm px-3 py-1">
+    <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
+      
+      <div class="d-flex align-items-center gap-2">
+        <svg class="logo" viewBox="0 0 24 24" width="40" height="40" fill="#1877F2">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <div class="searchBox">
+          <input type="text" class="form-control rounded-pill bg-light border-0 px-3 py-1 text-sm" placeholder="Search Facebook">
+        </div>
+      </div>
+
+      <div class="d-none d-md-flex align-items-center gap-1 h-100">
+        <a href="#" class="navTab active px-4 py-2 rounded d-flex align-items-center justify-content-center text-primary border-bottom border-primary border-3 fw-bold text-decoration-none" title="Home">Home</a>
+        <a href="#" class="navTab px-4 py-2 rounded d-flex align-items-center justify-content-center text-secondary fw-bold text-decoration-none" title="Watch">Watch</a>
+        <a href="#" class="navTab px-4 py-2 rounded d-flex align-items-center justify-content-center text-secondary fw-bold text-decoration-none" title="Marketplace">Marketplace</a>
+        <a href="#" class="navTab px-4 py-2 rounded d-flex align-items-center justify-content-center text-secondary fw-bold text-decoration-none" title="Groups">Groups</a>
+        <a href="#" class="navTab px-4 py-2 rounded d-flex align-items-center justify-content-center text-secondary fw-bold text-decoration-none" title="Gaming">Gaming</a>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <button class="iconBtn btn rounded-circle bg-light border-0 d-flex align-items-center justify-content-center fw-bold" title="Menu">≡</button>
+        <button class="iconBtn btn rounded-circle bg-light border-0 d-flex align-items-center justify-content-center fw-bold" title="Messenger">💬</button>
+        <button class="iconBtn btn rounded-circle bg-light border-0 d-flex align-items-center justify-content-center fw-bold" title="Notifications">🔔</button>
+        <div class="profilePicPlaceholder rounded-circle bg-secondary text-white fw-bold d-flex align-items-center justify-content-center">MA</div>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="container-fluid py-3 px-2 px-md-4">
+    <div class="row justify-content-between g-3">
+
+      <aside class="col-lg-3 d-none d-lg-block leftSidebar">
+        <div class="d-flex flex-column gap-1">
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer">
+            <div class="profilePicPlaceholderSmall rounded-circle bg-secondary text-white fw-bold d-flex align-items-center justify-content-center">MA</div>
+            <span><strong>Muhammad Atif</strong></span>
+          </div>
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer"><span>👥 Friends</span></div>
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer"><span>🕒 Memories</span></div>
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer"><span>🔖 Saved</span></div>
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer"><span>👨‍👩‍👧‍👦 Groups</span></div>
+          <div class="sidebarItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer"><span>🏪 Marketplace</span></div>
+        </div>
+      </aside>
+
+      <main class="col-12 col-lg-6 feed mx-auto d-flex flex-column gap-3">
+
+        <div class="storiesContainer d-flex gap-2 overflow-auto pb-1">
+          <div class="storyCard createStory position-relative rounded overflow-hidden bg-white shadow-sm flex-shrink-0">
+            <div class="storyImg bg-secondary text-white d-flex align-items-center justify-content-center fw-bold">MA</div>
+            <div class="createBtn position-absolute rounded-circle bg-primary text-white text-center fw-bold d-flex align-items-center justify-content-center border border-2 border-white">+</div>
+            <span class="storyName text-center w-100 d-block small fw-bold mt-2">Create story</span>
+          </div>
+
+          <div class="storyCard position-relative rounded overflow-hidden shadow-sm flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&auto=format&fit=crop&q=80" class="storyBg w-100 h-100 object-fit-cover" alt="Haniya Khan Story">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" class="storyAvatar position-absolute rounded-circle border border-primary border-2" alt="Haniya Khan">
+            <span class="storyName text-white position-absolute small fw-bold">Haniya Khan</span>
+          </div>
+
+          <div class="storyCard position-relative rounded overflow-hidden shadow-sm flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&auto=format&fit=crop&q=80" class="storyBg w-100 h-100 object-fit-cover" alt="Haseeb Story">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" class="storyAvatar position-absolute rounded-circle border border-primary border-2" alt="Haseeb">
+            <span class="storyName text-white position-absolute small fw-bold">Haseeb</span>
+          </div>
+
+          <div class="storyCard position-relative rounded overflow-hidden shadow-sm flex-shrink-0">
+            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&auto=format&fit=crop&q=80" class="storyBg w-100 h-100 object-fit-cover" alt="Farhan Story">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" class="storyAvatar position-absolute rounded-circle border border-primary border-2" alt="Farhan">
+            <span class="storyName text-white position-absolute small fw-bold">Farhan</span>
+          </div>
+        </div>
+
+        <div class="card createPostCard border-0 shadow-sm p-3">
+          <div class="postTop d-flex align-items-center gap-2 mb-2">
+            <div class="profilePicPlaceholder rounded-circle bg-secondary text-white fw-bold d-flex align-items-center justify-content-center flex-shrink-0">MA</div>
+            <input type="text" class="form-control rounded-pill bg-light border-0 px-3 py-2" placeholder="What's on your mind, Muhammad Atif?">
+          </div>
+          <hr class="my-2">
+          <div class="postOptions d-flex justify-content-around text-secondary fw-bold small">
+            <button class="optionBtn btn border-0 text-secondary fw-bold small p-1">📹 Live video</button>
+            <button class="optionBtn btn border-0 text-secondary fw-bold small p-1">🖼️ Photo/video</button>
+            <button class="optionBtn btn border-0 text-secondary fw-bold small p-1">😊 Feeling/activity</button>
+          </div>
+        </div>
+
+        <div class="card postCard border-0 shadow-sm p-3">
+          <div class="postHeader d-flex align-items-center gap-2 mb-2">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" class="profilePic rounded-circle object-fit-cover" alt="Haniya Khan">
+            <div class="postInfo d-flex flex-column flex-grow-1">
+              <span class="authorName fw-bold">Haniya Khan</span>
+              <span class="postTime text-muted small">2 hrs ago • 🌐</span>
+            </div>
+            <button class="btn border-0 text-muted fs-5">⋯</button>
+          </div>
+          <p class="postText mb-2">Excited to start working on new Web Development projects today! 💻✨</p>
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=80" class="postImage w-100 rounded mb-2 object-fit-cover" alt="Post Image">
+          <hr class="my-2">
+          <div class="postActions d-flex justify-content-around">
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">👍 Like</button>
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">💬 Comment</button>
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">↗️ Share</button>
+          </div>
+        </div>
+
+        <div class="card postCard border-0 shadow-sm p-3">
+          <div class="postHeader d-flex align-items-center gap-2 mb-2">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" class="profilePic rounded-circle object-fit-cover" alt="Haseeb">
+            <div class="postInfo d-flex flex-column flex-grow-1">
+              <span class="authorName fw-bold">Haseeb</span>
+              <span class="postTime text-muted small">5 hrs ago • 🌐</span>
+            </div>
+            <button class="btn border-0 text-muted fs-5">⋯</button>
+          </div>
+          <p class="postText mb-2">Weekend getaway with friends! Nothing beats nature. 🌲⛰️</p>
+          <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&auto=format&fit=crop&q=80" class="postImage w-100 rounded mb-2 object-fit-cover" alt="Post Image">
+          <hr class="my-2">
+          <div class="postActions d-flex justify-content-around">
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">👍 Like</button>
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">💬 Comment</button>
+            <button class="actionBtn btn border-0 text-secondary fw-bold small py-1 flex-fill">↗️ Share</button>
+          </div>
+        </div>
+
+      </main>
+
+      <aside class="col-lg-3 d-none d-lg-block rightSidebar">
+        <div class="sectionTitle text-secondary fw-bold mb-2">Sponsored</div>
+        <div class="sponsoredItem d-flex align-items-center gap-3 mb-3 cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=200&auto=format&fit=crop&q=80" class="rounded object-fit-cover" width="80" height="60" alt="Ad">
+          <div>
+            <p class="adTitle fw-bold small mb-0">Learn Web Design</p>
+            <span class="adLink text-muted small">codemaster.com</span>
+          </div>
+        </div>
+
+        <hr class="my-3">
+
+        <div class="sectionTitle text-secondary fw-bold mb-2">Contacts</div>
+
+        <div class="contactItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer">
+          <div class="avatarWrapper position-relative">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" class="profilePicSmall rounded-circle object-fit-cover" alt="Haniya Khan">
+            <span class="onlineStatus position-absolute bottom-0 end-0 rounded-circle bg-success border border-2 border-white"></span>
+          </div>
+          <span class="fw-semibold small">Haniya Khan</span>
+        </div>
+
+        <div class="contactItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer">
+          <div class="avatarWrapper position-relative">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" class="profilePicSmall rounded-circle object-fit-cover" alt="Haseeb">
+            <span class="onlineStatus position-absolute bottom-0 end-0 rounded-circle bg-success border border-2 border-white"></span>
+          </div>
+          <span class="fw-semibold small">Haseeb</span>
+        </div>
+
+        <div class="contactItem d-flex align-items-center gap-3 p-2 rounded cursor-pointer">
+          <div class="avatarWrapper position-relative">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" class="profilePicSmall rounded-circle object-fit-cover" alt="Farhan">
+            <span class="onlineStatus position-absolute bottom-0 end-0 rounded-circle bg-success border border-2 border-white"></span>
+          </div>
+          <span class="fw-semibold small">Farhan</span>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
