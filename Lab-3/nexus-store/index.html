@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Premium Tech Storefront</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background: linear-gradient(180deg, #f8f6f2 0%, #e8e3dc 20%, #beada0 60%, #3a3430 100%);
+      background-attachment: fixed;
+      color: #1f1b18;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+    }
+
+    .navbar-custom {
+      background-color: #ffffff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-brand-dark {
+      background-color: #2b2623;
+      color: #ffffff !important;
+      border: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-brand-dark:hover {
+      background-color: #12100e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-nav-action {
+      background: #f1ede8;
+      color: #1f1b18;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .hero-section-full {
+      padding: 8rem 0 7rem;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      animation: heroFadeIn 1s ease forwards;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cardFadeUp {
+      from { opacity: 0; transform: translateY(35px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-card, .review-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+      transition: all 0.35s ease;
+      animation: cardFadeUp 0.8s ease both;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-img-wrapper {
+      height: 380px;
+      overflow: hidden;
+      background-color: #eae5df;
+      position: relative;
+    }
+
+    .product-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .star-rating { color: #d97706; }
+    .cart-count-badge { position: absolute; top: -4px; right: -6px; font-size: 0.7rem; }
+
+    .footer-pro {
+      background-color: #201c1a;
+      color: #a89f97;
+    }
+
+    .footer-pro a {
+      color: #e2dcd5;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-pro a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 d-flex align-items-center gap-2" href="#">
+        <span class="p-2 rounded-3 btn-brand-dark text-white fs-5 d-flex align-items-center justify-content-center" style="width:38px; height:38px;">
+          <i class="bi bi-lightning-charge-fill"></i>
+        </span>
+        <span class="tracking-tight text-dark">NEXUS</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav me-auto ms-lg-4 fw-semibold">
+          <li class="nav-item"><a class="nav-link text-dark active px-3" href="#catalog">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link text-dark px-3" href="#reviews">Reviews</a></li>
+          <li class="nav-item">
+            <button class="nav-link text-dark px-3 fw-semibold btn btn-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#addProductModal">
+              <i class="bi bi-plus-circle me-1 text-success"></i> Add Product
+            </button>
+          </li>
+        </ul>
+        
+        <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+          <button class="btn btn-nav-action px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-6"></i>
+            <span>Cart</span>
+            <span class="badge rounded-pill bg-danger cart-count-badge">2</span>
+          </button>
+          
+          <a href="login.html" class="btn btn-brand-dark px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 text-decoration-none">
+            <i class="bi bi-person-circle fs-6"></i>
+            <span>Account</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section-full text-dark d-flex align-items-center">
+    <div class="container py-4">
+      <div class="row align-items-center">
+        <div class="col-lg-8 col-xl-7">
+          <span class="badge bg-dark bg-opacity-10 text-dark border border-dark border-opacity-10 px-3 py-2 rounded-pill fw-medium mb-3">
+            Minimalist Audio & Workstations
+          </span>
+          <h1 class="display-3 fw-bold lh-sm mb-3">Crafted Precision For Modern Desks</h1>
+          <p class="lead text-secondary mb-4 fs-4">Discover studio-grade sound and workstation equipment built with sleek aesthetic simplicity.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#catalog" class="btn btn-brand-dark btn-lg px-4 py-3 fw-bold fs-6 rounded-pill text-decoration-none">Explore Catalog</a>
+            <button class="btn btn-outline-dark btn-lg px-4 py-3 fw-bold fs-6 rounded-pill" data-bs-toggle="modal" data-bs-target="#addProductModal">
+              + Add Product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" class="py-5">
+    <div class="container py-5">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 gap-3">
+        <div>
+          <span class="text-uppercase fw-bold text-muted small tracking-wider">Storefront</span>
+          <h2 class="fw-bold text-dark mb-1 fs-1">Product Catalog</h2>
+          <p class="text-secondary fs-5 mb-0">Browse through available studio equipment below.</p>
+        </div>
+        
+        <button class="btn btn-brand-dark fw-bold rounded-pill px-4 py-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addProductModal">
+          <i class="bi bi-plus-lg"></i> Add New Product
+        </button>
+      </div>
+
+      <div class="row g-4 g-lg-5">
+        <div class="col-lg-6">
+          <div class="product-card h-100 d-flex flex-column overflow-hidden">
+            <div class="product-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&q=80" alt="Headphones">
+              <span class="badge bg-dark position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 opacity-90 rounded-pill">Audio Tech</span>
+            </div>
+            <div class="p-4 p-md-5 d-flex flex-column flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold mb-0 text-dark fs-2">Acoustic Pro ANC</h3>
+                <span class="fw-bold text-dark fs-2">$299.99</span>
+              </div>
+              <div class="fs-5 mb-3">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <span class="text-muted ms-2 fs-6">(12 reviews)</span>
+              </div>
+              <p class="text-secondary fs-5 flex-grow-1 lh-base mb-4">Studio-grade active noise cancelling headphones with 40-hour battery life and memory foam comfort pads.</p>
+              <div class="pt-4 border-top">
+                <button class="btn btn-brand-dark w-100 py-3 fs-5 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="product-card h-100 d-flex flex-column overflow-hidden">
+            <div class="product-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&q=80" alt="Smartwatch">
+              <span class="badge bg-dark position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 opacity-90 rounded-pill">Wearables</span>
+            </div>
+            <div class="p-4 p-md-5 d-flex flex-column flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold mb-0 text-dark fs-2">Chronos Smartwatch</h3>
+                <span class="fw-bold text-dark fs-2">$199.50</span>
+              </div>
+              <div class="fs-5 mb-3">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star text-muted"></i>
+                <span class="text-muted ms-2 fs-6">(8 reviews)</span>
+              </div>
+              <p class="text-secondary fs-5 flex-grow-1 lh-base mb-4">Titanium casing with AMOLED display, heart rate tracking, health monitoring, and dual-frequency GPS navigation.</p>
+              <div class="pt-4 border-top">
+                <button class="btn btn-brand-dark w-100 py-3 fs-5 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="product-card h-100 d-flex flex-column overflow-hidden">
+            <div class="product-img-wrapper">
+              <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1000&q=80" alt="Mouse">
+              <span class="badge bg-dark position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 opacity-90 rounded-pill">Accessories</span>
+            </div>
+            <div class="p-4 p-md-5 d-flex flex-column flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold mb-0 text-dark fs-2">Ergonomic Mouse</h3>
+                <span class="fw-bold text-dark fs-2">$79.99</span>
+              </div>
+              <div class="fs-5 mb-3">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <span class="text-muted ms-2 fs-6">(15 reviews)</span>
+              </div>
+              <p class="text-secondary fs-5 flex-grow-1 lh-base mb-4">Customizable high-DPI optical sensor with ultra-low latency Bluetooth pairing and ergonomic palm rest support.</p>
+              <div class="pt-4 border-top">
+                <button class="btn btn-brand-dark w-100 py-3 fs-5 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-5 bg-white bg-opacity-25 border-top border-bottom">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="text-uppercase fw-bold text-muted small tracking-wider">Testimonials</span>
+        <h2 class="fw-bold text-dark fs-1">What Our Customers Say</h2>
+        <p class="text-secondary mb-0">Real feedback from verified NEXUS product users.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"The build quality on the Acoustic Pro headphones is unmatched. Noise cancellation works seamlessly during flight."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">AK</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Ali Khan</h6>
+                <span class="text-muted extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"Super fast delivery and minimal, premium packaging. The desk gear looks extremely clean on my workspace."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">HS</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Hamza Sheikh</h6>
+                <span class="text-muted extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-half star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"Great customer support and high performance items. The mouse grip is perfect for long coding hours."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">ZP</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Zainab Patel</h6>
+                <span class="text-muted extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom p-4">
+          <div>
+            <h4 class="modal-title fw-bold text-dark mb-1">Add New Product</h4>
+            <p class="text-muted small mb-0">Enter details to publish to catalog</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form action="#" method="get">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Item Title</label>
+                <input type="text" class="form-control" placeholder="e.g. Studio Headphones" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Price ($ USD)</label>
+                <input type="number" step="0.01" class="form-control" placeholder="199.99" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Category</label>
+                <select class="form-select">
+                  <option value="Audio Tech">Audio Tech</option>
+                  <option value="Wearables">Wearables</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Image URL</label>
+                <input type="url" class="form-control" placeholder="https://images.unsplash.com/..." required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-semibold text-dark">Description</label>
+                <textarea class="form-control" rows="3" placeholder="Enter short product description..."></textarea>
+              </div>
+              <div class="col-12 mt-4 d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary w-50 py-2.5 fw-bold rounded-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-brand-dark w-50 py-2.5 fw-bold rounded-3">Publish Product</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom p-4">
+      <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-cart3 me-2"></i> Your Shopping Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-4">
+      <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80" style="width: 50px; height: 50px; object-fit: cover;" class="rounded me-3">
+        <div class="flex-grow-1">
+          <h6 class="fw-bold mb-0 small text-dark">Acoustic Pro ANC</h6>
+          <span class="text-muted small">$299.99 x 1</span>
+        </div>
+        <div class="fw-bold small">$299.99</div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&q=80" style="width: 50px; height: 50px; object-fit: cover;" class="rounded me-3">
+        <div class="flex-grow-1">
+          <h6 class="fw-bold mb-0 small text-dark">Chronos Smartwatch</h6>
+          <span class="text-muted small">$199.50 x 1</span>
+        </div>
+        <div class="fw-bold small">$199.50</div>
+      </div>
+
+      <div class="border-top pt-3 mt-auto">
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+          <span>Subtotal:</span>
+          <span>$499.49</span>
+        </div>
+        <button class="btn btn-brand-dark w-100 py-3 fw-bold rounded-3">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto py-5 footer-pro">
+    <div class="container">
+      <div class="row g-4 justify-content-between align-items-center border-bottom pb-4 mb-4">
+        <div class="col-md-5">
+          <a class="navbar-brand fw-bold fs-3 text-white d-flex align-items-center gap-2 mb-2" href="#">
+            <span class="p-2 rounded-3 bg-white text-dark fs-5 d-flex align-items-center justify-content-center" style="width:36px; height:36px;">
+              <i class="bi bi-lightning-charge-fill"></i>
+            </span>
+            <span>NEXUS</span>
+          </a>
+          <p class="small text-secondary mb-0">Crafting modern workstation equipment and minimal audio tech.</p>
+        </div>
+
+        <div class="col-md-6 col-lg-5">
+          <h6 class="text-white fw-bold mb-3 text-uppercase tracking-wider small">Store Contact & Owner Details</h6>
+          <ul class="list-unstyled mb-0 small d-flex flex-column gap-2">
+            <li>
+              <i class="bi bi-envelope text-warning me-2"></i>
+              <a href="mailto:muhammadatif04586@gmail.com">muhammadatif04586@gmail.com</a>
+            </li>
+            <li>
+              <i class="bi bi-telephone text-success me-2"></i>
+              <a href="tel:03161515601">03161515601</a>
+            </li>
+            <li>
+              <i class="bi bi-instagram text-danger me-2"></i>
+              <a href="https://instagram.com/Muhammadatif0_" target="_blank">@Muhammadatif0_</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center small">
+        <p class="mb-0 text-secondary">&copy; 2026 NEXUS Storefront. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
