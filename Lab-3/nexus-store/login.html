@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Login & Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <style>
+    body {
+      background: linear-gradient(180deg, #f8f6f2 0%, #e8e3dc 20%, #beada0 60%, #3a3430 100%);
+      background-attachment: fixed;
+      color: #1f1b18;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+    }
+
+    .navbar-custom {
+      background-color: #ffffff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-brand-dark {
+      background-color: #2b2623;
+      color: #ffffff !important;
+      border: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-brand-dark:hover {
+      background-color: #12100e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-social {
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      color: #1f1b18;
+      transition: all 0.2s ease;
+    }
+
+    .btn-social:hover {
+      background: #f4efea;
+      border-color: rgba(0, 0, 0, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .auth-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      animation: cardFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      overflow: hidden;
+    }
+
+    @keyframes cardFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tab-switch {
+      display: none;
+    }
+
+    .tab-header-nav {
+      display: flex;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 0.75rem;
+      padding: 0.35rem;
+      margin-bottom: 2rem;
+    }
+
+    .tab-header-label {
+      flex: 1;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #6c757d;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    #tab-login:checked ~ .auth-card .tab-header-nav label[for="tab-login"],
+    #tab-signup:checked ~ .auth-card .tab-header-nav label[for="tab-signup"] {
+      background: #ffffff;
+      color: #1f1b18;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .auth-form-panel {
+      display: none;
+    }
+
+    #tab-login:checked ~ .auth-card .login-form-panel {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    #tab-signup:checked ~ .auth-card .signup-form-panel {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-control:focus {
+      border-color: #2b2623;
+      box-shadow: 0 0 0 0.25rem rgba(43, 38, 35, 0.15);
+    }
+
+    .footer-pro {
+      background-color: #201c1a;
+      color: #a89f97;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 d-flex align-items-center gap-2" href="#">
+        <span class="p-2 rounded-3 btn-brand-dark text-white fs-5 d-flex align-items-center justify-content-center" style="width:38px; height:38px;">
+          <i class="bi bi-lightning-charge-fill"></i>
+        </span>
+        <span class="tracking-tight text-dark">NEXUS</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="index.html" class="btn btn-outline-dark px-3 py-2 rounded-pill fw-semibold small text-decoration-none">
+          <i class="bi bi-arrow-left me-1"></i> Back to Store
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-auto py-5 d-flex justify-content-center align-items-center">
+    <div class="w-100" style="max-width: 480px;">
+
+      <input type="radio" name="authTab" id="tab-login" class="tab-switch" checked>
+      <input type="radio" name="authTab" id="tab-signup" class="tab-switch">
+
+      <div class="auth-card p-4 p-sm-5">
+
+        <div class="tab-header-nav">
+          <label for="tab-login" class="tab-header-label">Sign In</label>
+          <label for="tab-signup" class="tab-header-label">Create Account</label>
+        </div>
+
+        <div class="auth-form-panel login-form-panel">
+          <div class="text-center mb-4">
+            <h3 class="fw-bold text-dark mb-1">Welcome Back</h3>
+            <p class="text-secondary small">Access your order history and saved items</p>
+          </div>
+
+          <div class="d-grid gap-2 mb-4">
+            <button class="btn btn-social py-2.5 fw-semibold small rounded-3 d-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-google text-danger fs-6"></i> Continue with Google
+            </button>
+            <button class="btn btn-social py-2.5 fw-semibold small rounded-3 d-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-apple fs-6"></i> Continue with Apple
+            </button>
+          </div>
+
+          <div class="d-flex align-items-center mb-4">
+            <hr class="flex-grow-1 my-0 text-muted">
+            <span class="px-3 small text-muted text-uppercase fw-semibold" style="font-size: 0.75rem;">Or email</span>
+            <hr class="flex-grow-1 my-0 text-muted">
+          </div>
+
+          <form action="#" method="get">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-dark">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+                <input type="email" class="form-control" placeholder="name@example.com" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label class="form-label small fw-semibold text-dark mb-0">Password</label>
+                <a href="#" class="small text-decoration-none text-dark fw-semibold">Forgot?</a>
+              </div>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+              </div>
+            </div>
+
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="rememberMe">
+              <label class="form-check-input-label small text-secondary" for="rememberMe">
+                Keep me signed in on this device
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-brand-dark w-100 py-2.5 fw-bold rounded-3">
+              Sign In <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </form>
+
+          <p class="text-center small text-secondary mt-4 mb-0">
+            Don't have an account? 
+            <label for="tab-signup" class="text-dark fw-bold style-pointer ms-1" style="cursor: pointer;">Sign Up</label>
+          </p>
+        </div>
+
+        <div class="auth-form-panel signup-form-panel">
+          <div class="text-center mb-4">
+            <h3 class="fw-bold text-dark mb-1">Create an Account</h3>
+            <p class="text-secondary small">Join NEXUS to unlock premium tech perks</p>
+          </div>
+
+          <form action="#" method="get">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-dark">Full Name</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-person text-muted"></i></span>
+                <input type="text" class="form-control" placeholder="Alex Morgan" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-dark">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+                <input type="email" class="form-control" placeholder="name@example.com" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-dark">Create Password</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                <input type="password" class="form-control" placeholder="Minimum 8 characters" required>
+              </div>
+            </div>
+
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="termsAgree" required>
+              <label class="form-check-label small text-secondary" for="termsAgree">
+                I agree to the <a href="#" class="text-dark fw-semibold text-decoration-none">Terms of Service</a> & <a href="#" class="text-dark fw-semibold text-decoration-none">Privacy Policy</a>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-brand-dark w-100 py-2.5 fw-bold rounded-3">
+              Create Account <i class="bi bi-check-circle ms-1"></i>
+            </button>
+          </form>
+
+          <p class="text-center small text-secondary mt-4 mb-0">
+            Already have an account? 
+            <label for="tab-login" class="text-dark fw-bold style-pointer ms-1" style="cursor: pointer;">Sign In</label>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="mt-auto py-4 footer-pro">
+    <div class="container text-center small">
+      <p class="mb-0">&copy; 2026 NEXUS Storefront. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
