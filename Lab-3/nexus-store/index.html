@@ -100,30 +100,60 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* horizontal scroll for each row */
+    /* ========== HORIZONTAL SCROLL ROW ==========
+       New products always go to the RIGHT.
+       WebKit scrollbar themed: black thumb, white border, gray track. */
     .horizontal-scroll-row {
       display: flex;
-      overflow-x: auto;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       gap: 1.5rem;
-      padding-bottom: 1.5rem;
+      padding: 0.5rem 0.25rem 1.5rem 0.25rem;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      flex-wrap: nowrap;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+      min-height: 100px;
     }
 
+    /* ===== THEMED WEBKIT SCROLLBAR ===== */
     .horizontal-scroll-row::-webkit-scrollbar {
-      height: 6px;
+      height: 12px;
+      background: transparent;
     }
 
     .horizontal-scroll-row::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.04);
+      background: rgba(0, 0, 0, 0.06);
       border-radius: 10px;
+      margin: 0 0.25rem;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08);
     }
 
     .horizontal-scroll-row::-webkit-scrollbar-thumb {
-      background: #222;
+      background: #000000;
       border-radius: 10px;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      transition: background 0.2s ease;
+    }
+
+    .horizontal-scroll-row::-webkit-scrollbar-thumb:hover {
+      background: #333333;
+    }
+
+    .horizontal-scroll-row::-webkit-scrollbar-thumb:active {
+      background: #555555;
+    }
+
+    .horizontal-scroll-row::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    /* ===== FIREFOX SCROLLBAR (matching theme) ===== */
+    .horizontal-scroll-row {
+      scrollbar-width: thin;
+      scrollbar-color: #000000 rgba(0, 0, 0, 0.06);
     }
 
     /* each card fixed width for consistent rows */
@@ -286,14 +316,14 @@
             </button>
           </li>
         </ul>
-        
+
         <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
           <button class="btn btn-nav-action px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
             <i class="bi bi-cart3 fs-6"></i>
             <span>Cart</span>
             <span class="badge rounded-pill bg-dark text-white cart-count-badge">2</span>
           </button>
-          
+
           <a href="login.html" class="btn btn-brand-dark px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 text-decoration-none">
             <i class="bi bi-person-circle fs-6"></i>
             <span>Account</span>
@@ -302,7 +332,6 @@
       </div>
     </div>
   </nav>
-
 
   <section class="hero-section-full d-flex align-items-center">
     <div class="container py-4">
@@ -324,7 +353,6 @@
     </div>
   </section>
 
-
   <section id="catalog" class="py-5 bg-white">
     <div class="container py-5">
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
@@ -333,7 +361,7 @@
           <h2 class="fw-bold text-dark mb-1 fs-1">Product Catalog</h2>
           <p class="text-dark opacity-75 fs-5 mb-0">Browse by category — each row scrolls horizontally.</p>
         </div>
-        
+
         <div class="d-flex align-items-center gap-2">
           <button class="btn btn-brand-dark fw-bold rounded-pill px-4 py-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addProductModal">
             <i class="bi bi-plus-lg"></i> Add New Product
@@ -344,10 +372,9 @@
       <div class="mb-5">
         <div class="category-header">
           <h3>Audio Tech</h3>
-          <span>Studio-grade sound</span>
+          <span>Studio-grade sound · Scroll →</span>
         </div>
         <div class="horizontal-scroll-row">
-          <!-- Product 1 -->
           <div class="product-card-item">
             <div class="product-card">
               <div class="product-img-wrapper">
@@ -376,7 +403,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="product-card-item">
             <div class="product-card">
               <div class="product-img-wrapper">
@@ -437,11 +464,10 @@
         </div>
       </div>
 
-
       <div class="mb-5">
         <div class="category-header">
           <h3>Wearables</h3>
-          <span>Smart & stylish</span>
+          <span>Smart & stylish · Scroll →</span>
         </div>
         <div class="horizontal-scroll-row">
 
@@ -473,7 +499,7 @@
               </div>
             </div>
           </div>
-   
+
           <div class="product-card-item">
             <div class="product-card">
               <div class="product-img-wrapper">
@@ -534,11 +560,10 @@
         </div>
       </div>
 
-  
       <div class="mb-5">
         <div class="category-header">
           <h3>Accessories</h3>
-          <span>Desk essentials</span>
+          <span>Desk essentials · Scroll →</span>
         </div>
         <div class="horizontal-scroll-row">
 
@@ -599,7 +624,7 @@
               </div>
             </div>
           </div>
-     
+
           <div class="product-card-item">
             <div class="product-card">
               <div class="product-img-wrapper">
@@ -633,7 +658,6 @@
 
     </div>
   </section>
-
 
   <section id="reviews" class="py-5 bg-white">
     <div class="container py-4">
@@ -713,7 +737,6 @@
     </div>
   </section>
 
-
   <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content border-0 shadow-lg rounded-4">
@@ -763,7 +786,6 @@
     </div>
   </div>
 
-
   <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="cartOffcanvas">
     <div class="offcanvas-header border-bottom p-4">
       <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-cart3 me-2"></i> Your Shopping Cart</h5>
@@ -797,11 +819,10 @@
     </div>
   </div>
 
-
   <footer class="mt-auto pt-5 pb-4 footer-reference">
     <div class="container">
       <div class="row g-4 pb-5 border-bottom border-secondary border-opacity-25">
-        
+
         <div class="col-lg-3 col-md-6 pe-lg-4">
           <a class="navbar-brand fw-bold fs-3 text-white d-flex align-items-center gap-2 mb-3" href="#">
             <span class="p-2 rounded-3 bg-white text-dark fs-5 d-flex align-items-center justify-content-center" style="width:36px; height:36px;">
