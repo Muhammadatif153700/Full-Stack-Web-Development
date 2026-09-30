@@ -49,7 +49,6 @@
       color: #ffffff !important;
     }
 
-
     .hero-section-full {
       padding: 8rem 0 7rem;
       background: linear-gradient(135deg, #2b2521 0%, #524740 40%, #8c7a6b 75%, #beada0 100%) !important;
@@ -58,7 +57,7 @@
       animation: heroFadeIn 1s ease forwards;
     }
 
-    .hero-section-full h1, 
+    .hero-section-full h1,
     .hero-section-full p {
       color: #ffffff !important;
     }
@@ -101,44 +100,51 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .horizontal-scroll-container {
-      display: flex !important;
-      overflow-x: auto !important;
-      scroll-snap-type: x mandatory !important;
-      gap: 1.5rem !important;
-      padding-bottom: 1.5rem !important;
-      scroll-behavior: smooth !important;
+    /* horizontal scroll for each row */
+    .horizontal-scroll-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      flex-wrap: nowrap;
     }
 
-    .horizontal-scroll-container::-webkit-scrollbar {
-      height: 8px;
+    .horizontal-scroll-row::-webkit-scrollbar {
+      height: 6px;
     }
 
-    .horizontal-scroll-container::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
+    .horizontal-scroll-row::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.04);
       border-radius: 10px;
     }
 
-    .horizontal-scroll-container::-webkit-scrollbar-thumb {
-      background: #000000;
+    .horizontal-scroll-row::-webkit-scrollbar-thumb {
+      background: #222;
       border-radius: 10px;
     }
 
+    /* each card fixed width for consistent rows */
     .product-card-item {
-      flex: 0 0 auto !important;
-      width: 480px !important;
-      max-width: 85vw !important;
-      scroll-snap-align: start !important;
+      flex: 0 0 auto;
+      width: 380px;
+      max-width: 85vw;
+      scroll-snap-align: start;
     }
 
-    .product-card, .review-card {
+    .product-card {
       background: #ffffff !important;
       border: 1px solid rgba(0, 0, 0, 0.08) !important;
       border-radius: 1.5rem !important;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
       transition: all 0.35s ease !important;
       animation: cardFadeUp 0.8s ease both;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .product-card:hover {
@@ -147,7 +153,7 @@
     }
 
     .product-img-wrapper {
-      height: 340px;
+      height: 280px;
       overflow: hidden;
       background-color: #f8f8f8;
       position: relative;
@@ -195,25 +201,64 @@
       color: #ffffff !important;
     }
 
-.social-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #3a3430;
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  font-size: 1.1rem;
-}
+    .social-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #3a3430;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-size: 1.1rem;
+    }
 
-.social-circle:hover {
-  background-color: #ffffff;
-  color: #1f1b18;
-  transform: translateY(-2px);
-}
+    .social-circle:hover {
+      background-color: #ffffff;
+      color: #1f1b18;
+      transform: translateY(-2px);
+    }
+
+    /* category separator */
+    .category-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .category-header h3 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .category-header span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .review-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-radius: 1.5rem !important;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.35s ease !important;
+      animation: cardFadeUp 0.8s ease both;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12) !important;
+    }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -258,7 +303,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section with brownish linear gradient -->
+
   <section class="hero-section-full d-flex align-items-center">
     <div class="container py-4">
       <div class="row align-items-center">
@@ -279,14 +324,14 @@
     </div>
   </section>
 
-  <!-- Product Catalog on clean white background -->
+
   <section id="catalog" class="py-5 bg-white">
     <div class="container py-5">
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
         <div>
           <span class="text-uppercase fw-bold text-dark opacity-75 small tracking-wider">Storefront</span>
           <h2 class="fw-bold text-dark mb-1 fs-1">Product Catalog</h2>
-          <p class="text-dark opacity-75 fs-5 mb-0">Scroll horizontally to view available studio gear.</p>
+          <p class="text-dark opacity-75 fs-5 mb-0">Browse by category — each row scrolls horizontally.</p>
         </div>
         
         <div class="d-flex align-items-center gap-2">
@@ -296,100 +341,300 @@
         </div>
       </div>
 
-      <div class="horizontal-scroll-container">
-        
-        <div class="product-card-item">
-          <div class="product-card h-100 d-flex flex-column overflow-hidden">
-            <div class="product-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&q=80" alt="Headphones">
-              <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Audio Tech</span>
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Audio Tech</h3>
+          <span>Studio-grade sound</span>
+        </div>
+        <div class="horizontal-scroll-row">
+          <!-- Product 1 -->
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&q=80" alt="Headphones">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Audio Tech</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Acoustic Pro ANC</h3>
+                  <span class="fw-bold text-dark fs-3">$299.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(12 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Studio-grade active noise cancelling headphones with 40-hour battery life and memory foam comfort pads.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="p-4 p-md-4 d-flex flex-column flex-grow-1">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3 class="fw-bold mb-0 text-dark fs-3">Acoustic Pro ANC</h3>
-                <span class="fw-bold text-dark fs-3">$299.99</span>
+          </div>
+      
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1000&q=80" alt="Wireless Earbuds">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Audio Tech</span>
               </div>
-              <div class="fs-6 mb-2">
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <span class="text-dark opacity-75 ms-2 fs-6">(12 reviews)</span>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Pulse Air</h3>
+                  <span class="fw-bold text-dark fs-3">$149.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-half star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(7 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">True wireless earbuds with spatial audio and adaptive EQ for immersive listening.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
               </div>
-              <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Studio-grade active noise cancelling headphones with 40-hour battery life and memory foam comfort pads.</p>
-              <div class="pt-3 border-top">
-                <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                </button>
+            </div>
+          </div>
+
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=1000&q=80" alt="Studio Speaker">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Audio Tech</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Nexus Monitor</h3>
+                  <span class="fw-bold text-dark fs-3">$399.00</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(5 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Active studio monitor with precise frequency response and sleek matte finish.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="product-card-item">
-          <div class="product-card h-100 d-flex flex-column overflow-hidden">
-            <div class="product-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&q=80" alt="Smartwatch">
-              <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Wearables</span>
-            </div>
-            <div class="p-4 p-md-4 d-flex flex-column flex-grow-1">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3 class="fw-bold mb-0 text-dark fs-3">Chronos Smartwatch</h3>
-                <span class="fw-bold text-dark fs-3">$199.50</span>
-              </div>
-              <div class="fs-6 mb-2">
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star text-muted"></i>
-                <span class="text-dark opacity-75 ms-2 fs-6">(8 reviews)</span>
-              </div>
-              <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Titanium casing with AMOLED display, heart rate tracking, health monitoring, and dual-frequency GPS navigation.</p>
-              <div class="pt-3 border-top">
-                <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card-item">
-          <div class="product-card h-100 d-flex flex-column overflow-hidden">
-            <div class="product-img-wrapper">
-              <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1000&q=80" alt="Mouse">
-              <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Accessories</span>
-            </div>
-            <div class="p-4 p-md-4 d-flex flex-column flex-grow-1">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3 class="fw-bold mb-0 text-dark fs-3">Ergonomic Mouse</h3>
-                <span class="fw-bold text-dark fs-3">$79.99</span>
-              </div>
-              <div class="fs-6 mb-2">
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <i class="bi bi-star-fill star-rating"></i>
-                <span class="text-dark opacity-75 ms-2 fs-6">(15 reviews)</span>
-              </div>
-              <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Customizable high-DPI optical sensor with ultra-low latency Bluetooth pairing and ergonomic palm rest support.</p>
-              <div class="pt-3 border-top">
-                <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Wearables</h3>
+          <span>Smart & stylish</span>
+        </div>
+        <div class="horizontal-scroll-row">
+
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&q=80" alt="Smartwatch">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Wearables</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Chronos Smartwatch</h3>
+                  <span class="fw-bold text-dark fs-3">$199.50</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star text-muted"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(8 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Titanium casing with AMOLED display, heart rate tracking, health monitoring, and dual-frequency GPS navigation.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+   
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=1000&q=80" alt="Fitness Band">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Wearables</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Active Band 2</h3>
+                  <span class="fw-bold text-dark fs-3">$89.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(23 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Slim fitness tracker with SpO2, sleep analysis, and 14-day battery life.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1544117519-31a4b719223d?w=1000&q=80" alt="Smart Ring">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Wearables</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Titan Ring</h3>
+                  <span class="fw-bold text-dark fs-3">$299.00</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-half star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(4 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Discreet health tracking ring with advanced sensors and 7-day battery.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Accessories</h3>
+          <span>Desk essentials</span>
+        </div>
+        <div class="horizontal-scroll-row">
+
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1000&q=80" alt="Mouse">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Accessories</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Ergonomic Mouse</h3>
+                  <span class="fw-bold text-dark fs-3">$79.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(15 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Customizable high-DPI optical sensor with ultra-low latency Bluetooth pairing and ergonomic palm rest support.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1000&q=80" alt="Mechanical Keyboard">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Accessories</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Nexus Mechanical</h3>
+                  <span class="fw-bold text-dark fs-3">$159.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(11 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Hot-swappable mechanical keyboard with RGB backlight and aluminium frame.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+          <div class="product-card-item">
+            <div class="product-card">
+              <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=1000&q=80" alt="Desk Mat">
+                <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">Accessories</span>
+              </div>
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="fw-bold mb-0 text-dark fs-3">Leather Desk Mat</h3>
+                  <span class="fw-bold text-dark fs-3">$49.99</span>
+                </div>
+                <div class="fs-6 mb-2">
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star-fill star-rating"></i>
+                  <i class="bi bi-star text-muted"></i>
+                  <span class="text-dark opacity-75 ms-2 fs-6">(9 reviews)</span>
+                </div>
+                <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">Premium vegan leather desk mat with non-slip base and minimalist stitching.</p>
+                <div class="pt-3 border-top">
+                  <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                    <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- Customer Reviews Section -->
+
   <section id="reviews" class="py-5 bg-white">
     <div class="container py-4">
       <div class="text-center mb-5">
@@ -468,7 +713,7 @@
     </div>
   </section>
 
-  <!-- Add Product Modal -->
+
   <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content border-0 shadow-lg rounded-4">
@@ -518,7 +763,7 @@
     </div>
   </div>
 
-  <!-- Shopping Cart Offcanvas -->
+
   <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="cartOffcanvas">
     <div class="offcanvas-header border-bottom p-4">
       <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-cart3 me-2"></i> Your Shopping Cart</h5>
@@ -552,7 +797,7 @@
     </div>
   </div>
 
-  <!-- Pitch Black Footer -->
+
   <footer class="mt-auto pt-5 pb-4 footer-reference">
     <div class="container">
       <div class="row g-4 pb-5 border-bottom border-secondary border-opacity-25">
@@ -566,11 +811,11 @@
           </a>
           <p class="text-white opacity-75 small mb-4 lh-base">Crafting modern workstation gear, audio technology, and minimalist desk setups. Built for creators.</p>
           <div class="d-flex gap-2">
-            <a href="https://instagram.com/Muhammadatif0_" target="_blank" class="social-btn" title="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="mailto:muhammadatif04586@gmail.com" class="social-btn" title="Email"><i class="bi bi-envelope-fill"></i></a>
-            <a href="tel:03161515601" class="social-btn" title="Phone"><i class="bi bi-telephone-fill"></i></a>
-            <a href="#" class="social-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-btn" title="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://instagram.com/Muhammadatif0_" target="_blank" class="social-circle" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="mailto:muhammadatif04586@gmail.com" class="social-circle" title="Email"><i class="bi bi-envelope-fill"></i></a>
+            <a href="tel:03161515601" class="social-circle" title="Phone"><i class="bi bi-telephone-fill"></i></a>
+            <a href="#" class="social-circle" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="social-circle" title="YouTube"><i class="bi bi-youtube"></i></a>
           </div>
         </div>
 
