@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS — Premium Tech Storefront</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-custom {
+      background-color: #ffffff !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-brand-dark {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid #000000;
+      transition: all 0.25s ease;
+    }
+
+    .btn-brand-dark:hover {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border-color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-nav-action {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav-action:hover {
+      background: #000000 !important;
+      color: #ffffff !important;
+    }
+
+    .hero-section-full {
+      padding: 8rem 0 7rem;
+      background: linear-gradient(135deg, #2b2521 0%, #524740 40%, #8c7a6b 75%, #beada0 100%) !important;
+      color: #ffffff !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      animation: heroFadeIn 1s ease forwards;
+    }
+
+    .hero-section-full h1,
+    .hero-section-full p {
+      color: #ffffff !important;
+    }
+
+    .btn-hero-light {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #ffffff;
+      transition: all 0.25s ease;
+    }
+
+    .btn-hero-light:hover {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-hero-outline {
+      background-color: transparent !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+      transition: all 0.25s ease;
+    }
+
+    .btn-hero-outline:hover {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      transform: translateY(-2px);
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes cardFadeUp {
+      from { opacity: 0; transform: translateY(35px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .horizontal-scroll-row {
+      display: flex;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      gap: 1.5rem;
+      padding: 0.5rem 0.25rem 1.5rem 0.25rem;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+      min-height: 100px;
+    }
+
+    .horizontal-scroll-row::-webkit-scrollbar {
+      height: 14px;
+      background: transparent;
+    }
+    .horizontal-scroll-row::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      margin: 0 0.25rem;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+    .horizontal-scroll-row::-webkit-scrollbar-thumb {
+      background: #000000;
+      border-radius: 10px;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    .horizontal-scroll-row::-webkit-scrollbar-thumb:hover {
+      background: #333333;
+    }
+    .horizontal-scroll-row {
+      scrollbar-width: thin;
+      scrollbar-color: #000000 rgba(0, 0, 0, 0.05);
+    }
+
+    .product-card-item {
+      flex: 0 0 auto;
+      width: 380px;
+      max-width: 85vw;
+      scroll-snap-align: start;
+    }
+
+    .product-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-radius: 1.5rem !important;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.35s ease !important;
+      animation: cardFadeUp 0.5s ease both;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18) !important;
+    }
+
+    .product-img-wrapper {
+      height: 280px;
+      overflow: hidden;
+      background-color: #f8f8f8;
+      position: relative;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
+    }
+
+    .product-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    .star-rating { color: #000000; }
+    .cart-count-badge { position: absolute; top: -4px; right: -6px; font-size: 0.7rem; }
+
+    .footer-reference {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      font-size: 0.9rem;
+    }
+
+    .footer-reference h6 {
+      color: #ffffff !important;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+      font-weight: 700;
+    }
+
+    .footer-reference a {
+      color: #ffffff !important;
+      opacity: 0.85;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-reference a:hover {
+      opacity: 1;
+      color: #ffffff !important;
+    }
+
+    .social-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #3a3430;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-size: 1.1rem;
+    }
+
+    .social-circle:hover {
+      background-color: #ffffff;
+      color: #1f1b18;
+      transform: translateY(-2px);
+    }
+
+    .category-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .category-header h3 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .category-header span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .review-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-radius: 1.5rem !important;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.35s ease !important;
+      animation: cardFadeUp 0.8s ease both;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+    
+    .empty-cart-msg {
+      text-align: center;
+      padding: 2rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 d-flex align-items-center gap-2" href="#">
+        <span class="p-2 rounded-3 btn-brand-dark text-white fs-5 d-flex align-items-center justify-content-center" style="width:38px; height:38px;">
+          <i class="bi bi-lightning-charge-fill"></i>
+        </span>
+        <span class="tracking-tight text-dark">NEXUS</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav me-auto ms-lg-4 fw-semibold">
+          <li class="nav-item"><a class="nav-link text-dark active px-3" href="#catalog">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link text-dark px-3" href="#reviews">Reviews</a></li>
+          <li class="nav-item">
+            <button class="nav-link text-dark px-3 fw-semibold btn btn-link text-decoration-none" data-bs-toggle="modal" data-bs-target="#addProductModal">
+              <i class="bi bi-plus-circle me-1 text-dark"></i> Add Product
+            </button>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+          <button class="btn btn-nav-action px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-6"></i>
+            <span>Cart</span>
+            <span class="badge rounded-pill bg-dark text-white cart-count-badge" id="cartBadge">0</span>
+          </button>
+
+          <a href="login.html" class="btn btn-brand-dark px-3 py-2 rounded-pill fw-semibold small d-flex align-items-center gap-2 text-decoration-none">
+            <i class="bi bi-person-circle fs-6"></i>
+            <span>Account</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section-full d-flex align-items-center">
+    <div class="container py-4">
+      <div class="row align-items-center">
+        <div class="col-lg-8 col-xl-7">
+          <span class="badge bg-white text-dark px-3 py-2 rounded-pill fw-medium mb-3">
+            Minimalist Audio & Workstations
+          </span>
+          <h1 class="display-3 fw-bold lh-sm mb-3">Crafted Precision For Modern Desks</h1>
+          <p class="lead opacity-90 mb-4 fs-4">Discover studio-grade sound and workstation equipment built with sleek aesthetic simplicity.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#catalog" class="btn btn-hero-light btn-lg px-4 py-3 fw-bold fs-6 rounded-pill text-decoration-none">Explore Catalog</a>
+            <button class="btn btn-hero-outline btn-lg px-4 py-3 fw-bold fs-6 rounded-pill" data-bs-toggle="modal" data-bs-target="#addProductModal">
+              + Add Product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" class="py-5 bg-white">
+    <div class="container py-5">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
+        <div>
+          <span class="text-uppercase fw-bold text-dark opacity-75 small tracking-wider">Storefront</span>
+          <h2 class="fw-bold text-dark mb-1 fs-1">Product Catalog</h2>
+          <p class="text-dark opacity-75 fs-5 mb-0">Browse by category — each row scrolls horizontally.</p>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-brand-dark fw-bold rounded-pill px-4 py-3 d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="bi bi-plus-lg"></i> Add New Product
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Audio Tech</h3>
+          <span>Studio-grade sound · Scroll →</span>
+        </div>
+        <div class="horizontal-scroll-row" id="row-audio"></div>
+      </div>
+
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Wearables</h3>
+          <span>Smart & stylish · Scroll →</span>
+        </div>
+        <div class="horizontal-scroll-row" id="row-wearables"></div>
+      </div>
+
+      <div class="mb-5">
+        <div class="category-header">
+          <h3>Accessories</h3>
+          <span>Desk essentials · Scroll →</span>
+        </div>
+        <div class="horizontal-scroll-row" id="row-accessories"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="reviews" class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="text-uppercase fw-bold text-dark opacity-75 small tracking-wider">Testimonials</span>
+        <h2 class="fw-bold text-dark fs-1">What Our Customers Say</h2>
+        <p class="text-dark opacity-75 mb-0">Real feedback from verified NEXUS product users.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"The build quality on the Acoustic Pro headphones is unmatched. Noise cancellation works seamlessly during flight."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">AK</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Ali Khan</h6>
+                <span class="text-dark opacity-75 extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"Super fast delivery and minimal, premium packaging. The desk gear looks extremely clean on my workspace."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">HS</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Hamza Sheikh</h6>
+                <span class="text-dark opacity-75 extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="review-card p-4 h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-fill star-rating"></i>
+                <i class="bi bi-star-half star-rating"></i>
+              </div>
+              <p class="text-dark small fst-italic">"Great customer support and high performance items. The mouse grip is perfect for long coding hours."</p>
+            </div>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width:40px; height:40px;">ZP</div>
+              <div>
+                <h6 class="fw-bold mb-0 text-dark small">Zainab Patel</h6>
+                <span class="text-dark opacity-75 extra-small" style="font-size:0.75rem;">Verified Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom p-4">
+          <div>
+            <h4 class="modal-title fw-bold text-dark mb-1">Add New Product</h4>
+            <p class="text-muted small mb-0">Send a POST request to persistent API</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="addProductForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Item Title</label>
+                <input type="text" class="form-control" id="prodTitle" placeholder="e.g. Studio Headphones" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Price ($ USD)</label>
+                <input type="number" step="0.01" min="0" class="form-control" id="prodPrice" placeholder="199.99" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Category</label>
+                <select class="form-select" id="prodCategory">
+                  <option value="audio">Audio Tech</option>
+                  <option value="wearables">Wearables</option>
+                  <option value="accessories">Accessories</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-semibold text-dark">Image URL</label>
+                <input type="url" class="form-control" id="prodImage" placeholder="https://images.unsplash.com/..." required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-semibold text-dark">Description</label>
+                <textarea class="form-control" id="prodDesc" rows="3" placeholder="Enter short product description..."></textarea>
+              </div>
+              <div class="col-12 mt-4 d-flex gap-2">
+                <button type="button" class="btn btn-outline-secondary w-50 py-2.5 fw-bold rounded-3" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-brand-dark w-50 py-2.5 fw-bold rounded-3">Publish Product</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom p-4">
+      <h5 class="offcanvas-title fw-bold text-dark"><i class="bi bi-cart3 me-2"></i> Your Shopping Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-4">
+      
+      <div id="cartItemsContainer" class="flex-grow-1"></div>
+
+      <div class="border-top pt-3 mt-auto">
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">$0.00</span>
+        </div>
+        <button class="btn btn-brand-dark w-100 py-3 fw-bold rounded-3" id="checkoutBtn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto pt-5 pb-4 footer-reference">
+    <div class="container">
+      <div class="row g-4 pb-5 border-bottom border-secondary border-opacity-25">
+        
+        <div class="col-lg-3 col-md-6 pe-lg-4">
+          <a class="navbar-brand fw-bold fs-3 text-white d-flex align-items-center gap-2 mb-3" href="#">
+            <span class="p-2 rounded-3 bg-white text-dark fs-5 d-flex align-items-center justify-content-center" style="width:36px; height:36px;">
+              <i class="bi bi-lightning-charge-fill"></i>
+            </span>
+            <span class="tracking-tight">NEXUS</span>
+          </a>
+          <p class="text-white opacity-75 small mb-4 lh-base">Crafting modern workstation gear, audio technology, and minimalist desk setups. Built for creators.</p>
+          <div class="d-flex gap-2">
+            <a href="https://instagram.com/Muhammadatif0_" target="_blank" class="social-circle" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="mailto:muhammadatif04586@gmail.com" class="social-circle" title="Email"><i class="bi bi-envelope-fill"></i></a>
+            <a href="tel:03161515601" class="social-circle" title="Phone"><i class="bi bi-telephone-fill"></i></a>
+            <a href="#" class="social-circle" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="social-circle" title="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6">
+          <h6 class="text-uppercase">GETTING AROUND</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="#catalog">Home</a></li>
+            <li><a href="#catalog">Features</a></li>
+            <li><a href="#catalog">Pricing</a></li>
+            <li><a href="#reviews">Why NEXUS?</a></li>
+            <li><a href="#reviews">Testimonials</a></li>
+            <li><a href="#catalog">Get Started</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="#">Site Map</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6">
+          <h6 class="text-uppercase">GETTING HELP</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="#">FAQs</a></li>
+            <li><a href="mailto:muhammadatif04586@gmail.com">Contact Us</a></li>
+            <li><a href="#">Help Documentation</a></li>
+            <li><a href="#">Support Hub</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-6">
+          <h6 class="text-uppercase">PARTNERSHIPS</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="#">API Docs</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Become a Partner</a></li>
+            <li><a href="#">Affiliate Program</a></li>
+            <li><a href="#">Charity Support</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-6">
+          <h6 class="text-uppercase">LEGAL & COMPLIANCE</h6>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="#">Legal & Data Protection</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">DMCA Notice</a></li>
+            <li><a href="#">PCI Compliance</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-white opacity-75 extra-small" style="font-size: 0.8rem;">
+        <p class="mb-0">&copy; 2026 NEXUS Storefront. All rights reserved.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white">Privacy</a>
+          <a href="#" class="text-white">Terms</a>
+          <a href="#" class="text-white">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    const NexusAPI = {
+      getProducts: () => {
+        let data = localStorage.getItem('nexus_products');
+        if (!data) {
+          const initialData = [
+            { id: 'a1', name: 'Acoustic Pro ANC', price: 299.99, category: 'audio', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1000&q=80', desc: 'Studio-grade active noise cancelling headphones with 40-hour battery life.', rating: 5, reviews: 12 },
+            { id: 'a2', name: 'Pulse Air', price: 149.99, category: 'audio', image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=1000&q=80', desc: 'True wireless earbuds with spatial audio and adaptive EQ.', rating: 4.5, reviews: 7 },
+            { id: 'a3', name: 'Nexus Monitor', price: 399.00, category: 'audio', image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=1000&q=80', desc: 'Active studio monitor with precise frequency response.', rating: 5, reviews: 5 },
+            { id: 'w1', name: 'Chronos Smartwatch', price: 199.50, category: 'wearables', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1000&q=80', desc: 'Titanium casing with AMOLED display and dual-frequency GPS.', rating: 4, reviews: 8 },
+            { id: 'w2', name: 'Active Band 2', price: 89.99, category: 'wearables', image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=1000&q=80', desc: 'Slim fitness tracker with SpO2, sleep analysis, and 14-day battery.', rating: 5, reviews: 23 },
+            { id: 'w3', name: 'Titan Ring', price: 299.00, category: 'wearables', image: 'https://images.unsplash.com/photo-1544117519-31a4b719223d?w=1000&q=80', desc: 'Discreet health tracking ring with advanced sensors.', rating: 4.5, reviews: 4 },
+            { id: 'c1', name: 'Ergonomic Mouse', price: 79.99, category: 'accessories', image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=1000&q=80', desc: 'Customizable high-DPI optical sensor with ergonomic palm rest.', rating: 5, reviews: 15 },
+            { id: 'c2', name: 'Nexus Mechanical', price: 159.99, category: 'accessories', image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=1000&q=80', desc: 'Hot-swappable mechanical keyboard with RGB backlight.', rating: 5, reviews: 11 },
+            { id: 'c3', name: 'Leather Desk Mat', price: 49.99, category: 'accessories', image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=1000&q=80', desc: 'Premium vegan leather desk mat with non-slip base.', rating: 4, reviews: 9 }
+          ];
+          localStorage.setItem('nexus_products', JSON.stringify(initialData));
+          return initialData;
+        }
+        return JSON.parse(data);
+      },
+
+      addProduct: (product) => {
+        const products = NexusAPI.getProducts();
+        product.id = 'prod_' + Date.now();
+        product.rating = 5;
+        product.reviews = 0;
+        products.push(product);
+        localStorage.setItem('nexus_products', JSON.stringify(products));
+        return product;
+      },
+
+      getCart: () => {
+        let data = localStorage.getItem('nexus_cart');
+        return data ? JSON.parse(data) : [];
+      },
+
+      addToCart: (product) => {
+        let cart = NexusAPI.getCart();
+        let existing = cart.find(item => item.id === product.id);
+        if (existing) {
+          existing.qty += 1;
+        } else {
+          cart.push({ ...product, qty: 1 });
+        }
+        localStorage.setItem('nexus_cart', JSON.stringify(cart));
+        return cart;
+      },
+
+      clearCart: () => {
+        localStorage.removeItem('nexus_cart');
+        return [];
+      }
+    };
+
+    const renderStars = (rating) => {
+      let html = '';
+      for (let i = 1; i <= 5; i++) {
+        if (rating >= i) html += '<i class="bi bi-star-fill star-rating"></i>';
+        else if (rating >= i - 0.5) html += '<i class="bi bi-star-half star-rating"></i>';
+        else html += '<i class="bi bi-star text-muted"></i>';
+      }
+      return html;
+    };
+
+    const renderCatalog = () => {
+      const products = NexusAPI.getProducts();
+      
+      document.getElementById('row-audio').innerHTML = '';
+      document.getElementById('row-wearables').innerHTML = '';
+      document.getElementById('row-accessories').innerHTML = '';
+
+      products.forEach(p => {
+        let rowId = '';
+        let badgeText = '';
+        
+        if (p.category === 'audio') { rowId = 'row-audio'; badgeText = 'Audio Tech'; }
+        else if (p.category === 'wearables') { rowId = 'row-wearables'; badgeText = 'Wearables'; }
+        else if (p.category === 'accessories') { rowId = 'row-accessories'; badgeText = 'Accessories'; }
+
+        const row = document.getElementById(rowId);
+        if (!row) return;
+
+        const card = document.createElement('div');
+        card.className = 'product-card-item';
+        card.innerHTML = `
+          <div class="product-card">
+            <div class="product-img-wrapper">
+              <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x280?text=Image+Error'">
+              <span class="badge bg-dark text-white position-absolute top-0 end-0 m-4 fs-6 px-3 py-2 rounded-pill">${badgeText}</span>
+            </div>
+            <div class="p-4 d-flex flex-column flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3 class="fw-bold mb-0 text-dark fs-3 text-truncate" title="${p.name}">${p.name}</h3>
+                <span class="fw-bold text-dark fs-3">$${p.price.toFixed(2)}</span>
+              </div>
+              <div class="fs-6 mb-2">
+                ${renderStars(p.rating)}
+                <span class="text-dark opacity-75 ms-2 fs-6">(${p.reviews} reviews)</span>
+              </div>
+              <p class="text-dark opacity-75 flex-grow-1 lh-base mb-4">${p.desc || 'No description available.'}</p>
+              <div class="pt-3 border-top">
+                <button class="btn btn-brand-dark w-100 py-3 fs-6 fw-bold rounded-3 add-to-cart-btn" data-id="${p.id}">
+                  <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        row.appendChild(card);
+      });
+
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-id');
+          const product = NexusAPI.getProducts().find(p => p.id === id);
+          if (product) {
+            NexusAPI.addToCart(product);
+            updateCartUI();
+          }
+        });
+      });
+    };
+
+    const updateCartUI = () => {
+      const cart = NexusAPI.getCart();
+      const container = document.getElementById('cartItemsContainer');
+      const badge = document.getElementById('cartBadge');
+      const subtotalEl = document.getElementById('cartSubtotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      badge.innerText = totalItems;
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="empty-cart-msg">
+            <i class="bi bi-cart-x fs-1 mb-3 d-block"></i>
+            <p class="mb-0">Your cart is currently empty.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-3">
+          <img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover;" class="rounded me-3">
+          <div class="flex-grow-1">
+            <h6 class="fw-bold mb-0 small text-dark">${item.name}</h6>
+            <span class="text-muted small">$${item.price.toFixed(2)} x ${item.qty}</span>
+          </div>
+          <div class="fw-bold small">$${(item.price * item.qty).toFixed(2)}</div>
+        </div>
+      `).join('');
+    };
+
+    document.getElementById('addProductForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const newProduct = {
+        name: document.getElementById('prodTitle').value.trim(),
+        price: parseFloat(document.getElementById('prodPrice').value),
+        category: document.getElementById('prodCategory').value,
+        image: document.getElementById('prodImage').value.trim(),
+        desc: document.getElementById('prodDesc').value.trim()
+      };
+
+      NexusAPI.addProduct(newProduct);
+      
+      e.target.reset();
+      const modalEl = document.getElementById('addProductModal');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+      renderCatalog();
+
+      setTimeout(() => {
+        let rowId = newProduct.category === 'audio' ? 'row-audio' : newProduct.category === 'wearables' ? 'row-wearables' : 'row-accessories';
+        const row = document.getElementById(rowId);
+        if (row) row.scrollTo({ left: row.scrollWidth, behavior: 'smooth' });
+      }, 300);
+    });
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      const cart = NexusAPI.getCart();
+      if (cart.length === 0) return alert('Your cart is empty!');
+      
+      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      alert(`Order Placed Successfully!\nTotal Paid: $${total.toFixed(2)}`);
+      
+      NexusAPI.clearCart();
+      updateCartUI();
+      
+      const ocEl = document.getElementById('cartOffcanvas');
+      const oc = bootstrap.Offcanvas.getInstance(ocEl);
+      if(oc) oc.hide();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCatalog();
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>
