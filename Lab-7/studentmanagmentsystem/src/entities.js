@@ -11,30 +11,31 @@ function createEntities() {
   const attendance = new Repository();
   const marks = new Repository();
 
-  function assertRelatedRecords(attributes) {
-    if (!students.findById(attributes.studentId)) {
+  const validateRefs = (attrs) => {
+    if (!students.findById(attrs.studentId)) {
       throw ApiError.badRequest("studentId must reference an existing student");
     }
-    if (!teachers.findById(attributes.teacherId)) {
+    if (!teachers.findById(attrs.teacherId)) {
       throw ApiError.badRequest("teacherId must reference an existing teacher");
     }
-  }
+  };
 
-  function assertAttendanceUnique(attributes, currentId) {
-    const duplicate = attendance
-      .findWhere({ studentId: attributes.studentId, date: attributes.date })
-      .some((record) => record.id !== currentId);
-    if (duplicate) {
+  const validateAttendanceUnique = (attrs, currentId) => {
+    const isDuplicate = attendance
+      .findWhere({ studentId: attrs.studentId, date: attrs.date })
+      .some((item) => item.id !== currentId);
+
+    if (isDuplicate) {
       throw ApiError.conflict("Attendance already exists for this student on this date");
     }
-  }
+  };
 
-  function assertMarkValid(attributes) {
-    assertRelatedRecords(attributes);
-    if (attributes.obtained > attributes.total) {
+  const validateMarks = (attrs) => {
+    validateRefs(attrs);
+    if (attrs.obtained > attrs.total) {
       throw ApiError.badRequest("obtained cannot be greater than total");
     }
-  }
+  };
 
   const studentController = new CrudController({
     repository: students,
@@ -45,26 +46,18 @@ function createEntities() {
       age: { type: "whole" },
       className: { type: "text", required: false }
     }),
-    beforeCreate(attributes) {
-      if (students.findWhere({ rollNo: attributes.rollNo }).length) {
-        throw ApiError.conflict("rollNo already exists");
-      }
+    beforeCreate(attrs) {
+      const exists = students.findWhere({ rollNo: attrs.rollNo }).length > 0;
+      if (exists) throw ApiError.conflict("rollNo already exists");
     },
-    beforeUpdate(attributes, current) {
-      if (
-        attributes.rollNo !== current.rollNo &&
-        students.findWhere({ rollNo: attributes.rollNo }).length
-      ) {
-        throw ApiError.conflict("rollNo already exists");
-      }
+    beforeUpdate(attrs, current) {
+      const isRollChanged = attrs.rollNo !== current.rollNo;
+      const exists = students.findWhere({ rollNo: attrs.rollNo }).length > 0;
+      if (isRollChanged && exists) throw ApiError.conflict("rollNo already exists");
     },
     beforeDelete(student) {
-      for (const record of attendance.findWhere({ studentId: student.id })) {
-        attendance.erase(record.id);
-      }
-      for (const record of marks.findWhere({ studentId: student.id })) {
-        marks.erase(record.id);
-      }
+      attendance.findWhere({ studentId: student.id }).forEach((row) => attendance.erase(row.id));
+      marks.findWhere({ studentId: student.id }).forEach((row) => marks.erase(row.id));
     }
   });
 
@@ -76,24 +69,20 @@ function createEntities() {
       email: { type: "email" },
       phone: { type: "text", required: false }
     }),
-    beforeCreate(attributes) {
-      if (teachers.findWhere({ email: attributes.email }).length) {
-        throw ApiError.conflict("email already exists");
-      }
+    beforeCreate(attrs) {
+      const exists = teachers.findWhere({ email: attrs.email }).length > 0;
+      if (exists) throw ApiError.conflict("email already exists");
     },
-    beforeUpdate(attributes, current) {
-      if (
-        attributes.email !== current.email &&
-        teachers.findWhere({ email: attributes.email }).length
-      ) {
-        throw ApiError.conflict("email already exists");
-      }
+    beforeUpdate(attrs, current) {
+      const isEmailChanged = attrs.email !== current.email;
+      const exists = teachers.findWhere({ email: attrs.email }).length > 0;
+      if (isEmailChanged && exists) throw ApiError.conflict("email already exists");
     },
     beforeDelete(teacher) {
-      if (
-        attendance.findWhere({ teacherId: teacher.id }).length ||
-        marks.findWhere({ teacherId: teacher.id }).length
-      ) {
+      const hasAttendance = attendance.findWhere({ teacherId: teacher.id }).length > 0;
+      const hasMarks = marks.findWhere({ teacherId: teacher.id }).length > 0;
+
+      if (hasAttendance || hasMarks) {
         throw ApiError.conflict("Teacher is referenced by attendance or marks");
       }
     }
@@ -111,13 +100,13 @@ function createEntities() {
       },
       remarks: { type: "text", required: false }
     }),
-    beforeCreate(attributes) {
-      assertRelatedRecords(attributes);
-      assertAttendanceUnique(attributes);
+    beforeCreate(attrs) {
+      validateRefs(attrs);
+      validateAttendanceUnique(attrs);
     },
-    beforeUpdate(attributes, current) {
-      assertRelatedRecords(attributes);
-      assertAttendanceUnique(attributes, current.id);
+    beforeUpdate(attrs, current) {
+      validateRefs(attrs);
+      validateAttendanceUnique(attrs, current.id);
     }
   });
 
@@ -134,8 +123,8 @@ function createEntities() {
       obtained: { type: "decimal" },
       total: { type: "decimal" }
     }),
-    beforeCreate: assertMarkValid,
-    beforeUpdate: assertMarkValid
+    beforeCreate: validateMarks,
+    beforeUpdate: validateMarks
   });
 
   return {
