@@ -11,60 +11,65 @@ class Schema {
     }
 
     const output = {};
-    for (const [name, definition] of Object.entries(this.fields)) {
-      if (!Object.prototype.hasOwnProperty.call(input, name)) {
+    for (const name in this.fields) {
+      if (!Object.prototype.hasOwnProperty.call(this.fields, name)) continue;
+      const definition = this.fields[name];
+
+      if (!(name in input)) {
         if (!partial && definition.required !== false) {
           throw ApiError.badRequest(`${name} is required`);
         }
         continue;
       }
+
       output[name] = this.validate(name, input[name], definition);
     }
     return output;
   }
 
   validate(name, value, definition) {
-    const invalid = () => {
+    const fail = () => {
       throw ApiError.badRequest(`${name} must be a valid ${definition.type}`);
     };
 
-    switch (definition.type) {
-      case "text":
-        if (typeof value !== "string" || value.trim() === "") invalid();
-        return value.trim();
-      case "email":
-        if (
-          typeof value !== "string" ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
-        ) {
-          invalid();
-        }
-        return value.trim();
-      case "whole":
-        if (!Number.isSafeInteger(value)) invalid();
-        return value;
-      case "decimal":
-        if (typeof value !== "number" || !Number.isFinite(value)) invalid();
-        return value;
-      case "day": {
-        if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-          invalid();
-        }
-        const date = new Date(`${value}T00:00:00.000Z`);
-        if (
-          !Number.isFinite(date.getTime()) ||
-          date.toISOString().slice(0, 10) !== value
-        ) {
-          invalid();
-        }
-        return value;
-      }
-      case "choice":
-        if (!definition.options.includes(value)) invalid();
-        return value;
-      default:
-        throw new Error(`Unsupported schema type: ${definition.type}`);
+    const type = definition.type;
+
+    if (type === "text") {
+      if (typeof value !== "string" || !value.trim()) fail();
+      return value.trim();
     }
+
+    if (type === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (typeof value !== "string" || !emailRegex.test(value.trim())) fail();
+      return value.trim();
+    }
+
+    if (type === "whole") {
+      if (!Number.isSafeInteger(value)) fail();
+      return value;
+    }
+
+    if (type === "decimal") {
+      if (typeof value !== "number" || !Number.isFinite(value)) fail();
+      return value;
+    }
+
+    if (type === "day") {
+      if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) fail();
+      const date = new Date(`${value}T00:00:00.000Z`);
+      if (isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) {
+        fail();
+      }
+      return value;
+    }
+
+    if (type === "choice") {
+      if (!definition.options.includes(value)) fail();
+      return value;
+    }
+
+    throw new Error(`Unsupported schema type: ${type}`);
   }
 }
 
