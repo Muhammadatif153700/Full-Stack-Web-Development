@@ -4,58 +4,65 @@ class CrudController {
   constructor({ repository, schema, beforeCreate, beforeUpdate, beforeDelete }) {
     this.repository = repository;
     this.schema = schema;
-    this.beforeCreate = beforeCreate || (() => {});
-    this.beforeUpdate = beforeUpdate || (() => {});
-    this.beforeDelete = beforeDelete || (() => {});
+    this.beforeCreate = beforeCreate ?? (() => {});
+    this.beforeUpdate = beforeUpdate ?? (() => {});
+    this.beforeDelete = beforeDelete ?? (() => {});
   }
 
   list(query = {}) {
-    const criteria = {};
-    for (const [key, value] of Object.entries(query)) {
-      const definition = this.schema.fields[key];
-      if (!definition) continue;
-      if (definition.type === "whole" || definition.type === "decimal") {
-        const parsed = Number(value);
-        if (!Number.isFinite(parsed) || (definition.type === "whole" && !Number.isSafeInteger(parsed))) {
-          throw ApiError.badRequest(`${key} must be a valid ${definition.type}`);
+    const filters = {};
+
+    Object.keys(query).forEach((key) => {
+      const fieldDef = this.schema.fields[key];
+      if (!fieldDef) return;
+
+      const val = query[key];
+      if (fieldDef.type === "whole" || fieldDef.type === "decimal") {
+        const numVal = Number(val);
+        const isInvalid = !Number.isFinite(numVal) || (fieldDef.type === "whole" && !Number.isSafeInteger(numVal));
+
+        if (isInvalid) {
+          throw ApiError.badRequest(`${key} must be a valid ${fieldDef.type}`);
         }
-        criteria[key] = parsed;
+        filters[key] = numVal;
       } else {
-        criteria[key] = value;
+        filters[key] = val;
       }
-    }
-    return this.repository.findWhere(this.schema.sanitize(criteria, { partial: true }));
+    });
+
+    const cleanFilters = this.schema.sanitize(filters, { partial: true });
+    return this.repository.findWhere(cleanFilters);
   }
 
   show(id) {
-    const record = this.repository.findById(id);
-    if (!record) throw ApiError.notFound("Record not found");
-    return record;
+    const item = this.repository.findById(id);
+    if (!item) throw ApiError.notFound("Record not found");
+    return item;
   }
 
   create(body) {
-    const attributes = this.schema.sanitize(body);
-    this.beforeCreate(attributes);
-    return this.repository.insert(attributes);
+    const payload = this.schema.sanitize(body);
+    this.beforeCreate(payload);
+    return this.repository.insert(payload);
   }
 
   replace(id, body) {
-    const current = this.show(id);
-    const attributes = this.schema.sanitize(body);
-    this.beforeUpdate(attributes, current);
-    return this.repository.overwrite(id, attributes);
+    const existing = this.show(id);
+    const payload = this.schema.sanitize(body);
+    this.beforeUpdate(payload, existing);
+    return this.repository.overwrite(id, payload);
   }
 
   patch(id, body) {
-    const current = this.show(id);
-    const attributes = this.schema.sanitize(body, { partial: true });
-    this.beforeUpdate({ ...current, ...attributes }, current);
-    return this.repository.merge(id, attributes);
+    const existing = this.show(id);
+    const payload = this.schema.sanitize(body, { partial: true });
+    this.beforeUpdate(Object.assign({}, existing, payload), existing);
+    return this.repository.merge(id, payload);
   }
 
   destroy(id) {
-    const current = this.show(id);
-    this.beforeDelete(current);
+    const existing = this.show(id);
+    this.beforeDelete(existing);
     this.repository.erase(id);
     return { message: "Record deleted successfully" };
   }
